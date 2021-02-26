@@ -1,25 +1,29 @@
-let secretNumber = 2;
-
 const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-rl.question('Enter a max number:', (answer1) => {
-    rl.question('Enter a min number:', (answer2) => {
-     console.log( `I'm thinking of a number between ${answer1} and ${answer2}...`)
-        rl.pause();
-    });
-});
+let secretNumber = 2;
 
-rl.question('Enter a guess:', (answer3) => {
+// rl.question('Enter a max number:', (answer1) => {
+//     rl.question('Enter a min number:', (answer2) => {
+//      console.log( `I'm thinking of a number between ${answer1} and ${answer2}...`)
+//         rl.pause();
+//     });
+// });
 
-    if(checkGuess(answer3)){
-       rl.close();
-    }
-
-})
+function askGuess(){
+    rl.question('Enter a guess:', (answer3) => {
+        if (checkGuess(Number(answer3))){
+            console.log("YOU WON") 
+            rl.close();
+        } else {
+        askGuess();
+        }
+       
+    })
+}
 
 function checkGuess(numberGuessed) {
     if (numberGuessed > secretNumber) {
@@ -38,7 +42,7 @@ function checkGuess(numberGuessed) {
 }
 
 
-
+askGuess();
 
 
 
